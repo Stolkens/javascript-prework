@@ -1,9 +1,6 @@
-    
 {
-let resultplayer = 0
-let resultcomp = 0
-    
-
+let resultPlayer = 0;
+    resultComp = 0;
 function playGame (playerInput) {
     
     
@@ -48,4 +45,44 @@ function start3 (){
 let button3 = document.getElementById('button3');
 button3.addEventListener('click', start3);
 
+const getMoveName = function(moveId) {
+	if (moveId == 1) {
+		return "kamień";
+	} else if (moveId == 2) {
+		return "papier";
+	} else if (moveId == 3) {
+		return "nożyce";
+	}
+	printMessage("Podałeś niewłaściwą wartość " + moveId);
+	return "nieznany ruch";
+}
+const finalScore = function () {
+	if (resultComp == 5 || resultPlayer == 5) {
+		printFinalScore("Koniec gry!! Chcesz zagrać jeszcze raz?");
+		resultComp = 0;
+		resultPlayer = 0;
+	}
+}
+const displayResult = function(computerMove, playerMove) {
+	printMessage(
+		"Ja zagrałem " + computerMove + ", a ty " + playerMove + " więc "
+	);
+	if (computerMove == playerMove) {
+		printMessage("Jest remis");
+	} else if (computerMove == "kamień" && playerMove == "papier") {
+		printMessage("wygrałeś!");
+		resultPlayer++;
+	} else if (computerMove == "papier" && playerMove == "nożyce") {
+		printMessage("wygrałeś!");
+		resultPlayer++;
+	} else if (computerMove == "nożyce" && playerMove == "kamień") {
+		printMessage("wygrałeś!");
+		resultPlayer++;
+	} else {
+		printMessage("przegrałeś!");
+		resultComp++;
+	}
+	printResult("Twój wynik: " + resultPlayer + " Mój wynik: " + resultComp);
+	finalScore();
+}
 }
